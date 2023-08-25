@@ -1,0 +1,15 @@
+node_modules
+.DS_Store
+dist
+
+unzip/*
+!unzip/.keep
+
+uploads/*
+# allows uploads/.keep to be committed
+!uploads/.keep
+
+mongodata/*
+!mongodata/.keep!/.env
+/.env
+.idea

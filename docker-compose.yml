@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    command: npm run dev
+    ports:
+      - "8081:8081"
+    volumes:
+      - .:/usr/src/app
+    environment:
+      NODE_ENV: development
+      API_TOKEN: 'test'
+      API_SERVER_AUTH: false
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+
+volumes:
+  mongodata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./mongodata
