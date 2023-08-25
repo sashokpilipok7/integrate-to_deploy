@@ -4,4 +4,5 @@ export const SERVICE = {
   BUNNY_NET: "bunny.net",
   STACKING_CLOUD: "stacking.cloud",
   DIGITAL_OCEAN: "digital_ocean",
+  CONTABO: "contabo",
 };

@@ -3,6 +3,7 @@ import * as AwsService from "../../clouds/amazon";
 import { AzureService } from "../../clouds/azure";
 import { BunnyNetService } from "../../clouds/bunny.net";
 import { DigitalOceanService } from "../../clouds/digitalOcean";
+import { ContaboService } from "../../clouds/contabo";
 import { StatusService } from "./statusService";
 
 import { SERVICE } from "../../constants";
@@ -112,6 +113,29 @@ export default async (req: Request, res: Response) => {
         await DigitalOceanService.getInstance();
 
         console.log("Digital Ocean connected");
+        connectionInfo.verified = true;
+      } catch (error) {
+        console.error(error);
+        return StatusService.UnprocessableEntity(res, {
+          verified: false,
+          error: error.message,
+        });
+      }
+
+      break;
+
+    case SERVICE.CONTABO:
+      // get params from request
+
+      ContaboService.requestParams = {
+        accessKey: req.body.accessKey,
+      } as IDigitalOceanRequestProps;
+
+      // test the connection
+      try {
+        await ContaboService.getInstance();
+
+        console.log("CONTABO connected");
         connectionInfo.verified = true;
       } catch (error) {
         console.error(error);
